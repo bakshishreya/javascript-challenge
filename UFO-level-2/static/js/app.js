@@ -1,13 +1,12 @@
 // from data.js
 var tableData = data;
 var tbody = d3.select('tbody');
-var input = d3.selectAll('input');
 var btn = d3.select('button');
 
-populateTable(tableData);
-input.on('change', handleChange);
-btn.on('click', handleClick);
 // YOUR CODE HERE!
+populateTable(tableData);
+btn.on('click', handleClick);
+// =============================================
 function populateTable(data) {
     tbody.html("");
 
@@ -22,23 +21,39 @@ function populateTable(data) {
     });
 };
 
-var filteredData = tableData;
+function handleClick() {
 
-function handleChange() {
+    var dict1 = {};
 
-    var key = d3.select(this).property('id');
-    var value = d3.select(this).property('value');
 
-    if (value) {
-        filteredData = filteredData.filter(row => row[key] === value);
+    var date = d3.select('#datetime').property('value');
+    var city = d3.select('#city').property('value');
+    var city = d3.select('#city').property('value');
+    
+    dict1['datetime']=date;
+
+
+
+
+    //var date = d3.select('input').property('value');
+    console.log(array1);
+    console.log(city);
+   
+    var filteredData = tableData;
+    
+    
+    dict1.forEach(element => function(element){
+            if (element) {
+        filteredData = filteredData.filter(row => row.element === dict1[element]);
+    }});
+
+
+
+    if (city) {
+        filteredData = filteredData.filter(row => row.city === city);
     };
 
-    populateTable(filteredData);
-}
 
-function handleClick() {
-    input.property("value", "");
-    filteredData = tableData;
-
+    d3.select('input').property('value', '');
     populateTable(filteredData);
 }
