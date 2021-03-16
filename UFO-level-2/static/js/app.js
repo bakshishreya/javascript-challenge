@@ -23,39 +23,44 @@ function populateTable(data) {
 
 function handleClick() {
 
-    var dict1 = {};
-
-
+    // var dict1 = {};
     var date = d3.select('#datetime').property('value');
     var city = d3.select('#city').property('value');
-    var city = d3.select('#state').property('value');
-    var city = d3.select('#country').property('value');
-    var city = d3.select('#shape').property('value');
-    
-    dict1['datetime']=date;
-
-
-
-
+    var state = d3.select('#state').property('value');
+    var country = d3.select('#country').property('value');
+    var shape = d3.select('#shape').property('value');
+    // dict1['datetime']=date;
     //var date = d3.select('input').property('value');
-    console.log(array1);
+    console.log(date);
     console.log(city);
-   
+    console.log(state);
+    console.log(country);
+    console.log(shape);
     var filteredData = tableData;
     
+    // dict1.forEach(element => function(element){
+    //         if (element) {
+    //     filteredData = filteredData.filter(row => row.element === dict1[element]);
     
-    dict1.forEach(element => function(element){
-            if (element) {
-        filteredData = filteredData.filter(row => row.element === dict1[element]);
-    }});
-
-
+    if (date) {
+        filteredData = filteredData.filter(row => row.datetime === date);
+    };
 
     if (city) {
         filteredData = filteredData.filter(row => row.city === city);
     };
 
+    if (state) {
+        filteredData = filteredData.filter(row => row.state === state);
+    };
+
+    if (country) {
+        filteredData = filteredData.filter(row => row.country === country);
+    };
+    if (shape) {
+        filteredData = filteredData.filter(row => row.shape === shape);
+    };
 
     d3.select('input').property('value', '');
     populateTable(filteredData);
-}
+};
